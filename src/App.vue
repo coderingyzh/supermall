@@ -1,32 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- keep-alive会保存创建的组件，组件会被缓存起来，再次跳转到组件时，就不会被再次创建.
+    include: 只有匹配的组件会被缓存
+    exclude: 只有匹配的组件不会被缓存：<keep-alive exclude='组件的name属性'>-->
+    <keep-alive exclude="ProductDetail">
+      <router-view></router-view>
+    </keep-alive>
+    <main-tab-bar></main-tab-bar>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import MainTabBar from "components/content/maintabbar/MainTabBar";
+export default {
+  name: "App",
+  components: {
+    MainTabBar
+  }
+};
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style scoped>
+@import "assets/css/base.css";
 </style>
